@@ -91,6 +91,11 @@
                         <input id="txtBadgeUrl" is="emby-input" name="txtBadgeUrl" type="text"/>
                         <div class="fieldDescription">Custom badge url, PNG format is recommended. (default: zimu.png)</div>
                     </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="txtBadgeUrl2">Badge url 2:</label>
+                        <input id="txtBadgeUrl2" is="emby-input" name="txtBadgeUrl2" type="text" />
+                        <div class="fieldDescription">Second badge url for videos with 'UC' tag, PNG format is recommended.</div>
+                    </div>
                 </div>
 
                 <div class="verticalSection">
@@ -172,7 +177,9 @@
                                 <option value="Google">Google</option>
                                 <option value="GoogleFree">Google (Free)</option>
                                 <option value="DeepL">DeepL (Free)</option>
+                                <option value="DeepLX">DeepLX (Custom)</option>
                                 <option value="OpenAi">OpenAI</option>
+                                <option value="OpenAiX">OpenAI (Custom)</option>
                             </select>
                         </div>
 
@@ -211,11 +218,50 @@
                             </div>
                         </div>
 
+                        <div class="selectTranslationEngineDeepLX">
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXBaseUrl">DeepL base url:</label>
+                                <input id="txtDeepLXBaseUrl" is="emby-input" name="txtDeepLXBaseUrl" type="text" required />
+                                <div class="fieldDescription">Custom base url for DeepL API (required)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtDeepLXApiKey">DeepL api key:</label>
+                                <input id="txtDeepLXApiKey" is="emby-input" name="txtDeepLXApiKey" type="text" />
+                                <div class="fieldDescription"></div>
+                            </div>
+                        </div>
+
                         <div class="selectTranslationEngineOpenAi">
                             <div class="inputContainer">
                                 <label class="inputLabel inputLabelUnfocused" for="txtOpenAiApiKey">OpenAI api key:</label>
                                 <input id="txtOpenAiApiKey" is="emby-input" name="txtOpenAiApiKey" type="text"/>
                                 <div class="fieldDescription"></div>
+                            </div>
+                        </div>
+
+                        <div class="selectTranslationEngineOpenAiX">
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXBaseUrl">OpenAI base url:</label>
+                                <input id="txtOpenAiXBaseUrl" is="emby-input" name="txtOpenAiXBaseUrl" type="text" required />
+                                <div class="fieldDescription">Custom base url for OpenAI API or compatible API (required)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXApiKey">OpenAI api key:</label>
+                                <input id="txtOpenAiXApiKey" is="emby-input" name="txtOpenAiXApiKey" type="text" />
+                                <div class="fieldDescription"></div>
+                            </div>
+                            <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="txtOpenAiXModel">OpenAI model:</label>
+                                <input id="txtOpenAiXModel" is="emby-input" name="txtOpenAiXModel" type="text" />
+                                <div class="fieldDescription">Custom model for OpenAI API (default: gpt-3.5-turbo)</div>
+                            </div>
+                            <div class="inputContainer">
+                                <textarea class="emby-input" id="txtOpenAiXSystemPrompt" label="OpenAI system prompt" rows="6"></textarea>
+                                <div class="fieldDescription">Custom system prompt for translation. Leave empty to use default prompt.</div>
+                            </div>
+                            <div class="inputContainer">
+                                <input is="emby-input" type="number" id="txtOpenAiXTemperature" label="OpenAI temperature" min="0.0" max="2.0" step="0.1" />
+                                <div class="fieldDescription">Controls randomness in the model's output (0.0-2.0). Lower values make the output more focused and deterministic.</div>
                             </div>
                         </div>
                     </div>
@@ -293,32 +339,51 @@
                 $('.selectTranslationEngineBaidu').css('display', 'inherit');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "Google") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'inherit');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "GoogleFree") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "DeepL") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'inherit');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
+            } else if (this.value === "DeepLX") {
+                $('.selectTranslationEngineBaidu').css('display', 'none');
+                $('.selectTranslationEngineGoogle').css('display', 'none');
+                $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'inherit');
+                $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
             } else if (this.value === "OpenAi") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'inherit');
-            } else {
+                $('.selectTranslationEngineOpenAiX').css('display', 'none');
+            } else if (this.value === "OpenAiX") {
                 $('.selectTranslationEngineBaidu').css('display', 'none');
                 $('.selectTranslationEngineGoogle').css('display', 'none');
                 $('.selectTranslationEngineDeepL').css('display', 'none');
+                $('.selectTranslationEngineDeepLX').css('display', 'none');
                 $('.selectTranslationEngineOpenAi').css('display', 'none');
+                $('.selectTranslationEngineOpenAiX').css('display', 'inherit');
             }
         });
 
@@ -335,6 +400,7 @@
                 page.querySelector('#chkEnableRealActorNames').checked = config.EnableRealActorNames;
                 page.querySelector('#chkEnableBadges').checked = config.EnableBadges;
                 $('#txtBadgeUrl', page).val(config.BadgeUrl).change();
+                $('#txtBadgeUrl2', page).val(config.BadgeUrl2).change();
                 $('#txtPrimaryImageRatio', page).val(config.PrimaryImageRatio).change();
                 $('#txtDefaultImageQuality', page).val(config.DefaultImageQuality).change();
                 page.querySelector('#chkEnableMovieProviderFilter').checked = config.EnableMovieProviderFilter;
@@ -350,6 +416,13 @@
                 $('#txtDeepLApiKey', page).val(config.DeepLApiKey).change();
                 $('#txtDeepLAltUrl', page).val(config.DeepLAltUrl).change();
                 $('#txtOpenAiApiKey', page).val(config.OpenAiApiKey).change();
+                $('#txtDeepLXBaseUrl', page).val(config.DeepLXBaseUrl).change();
+                $('#txtDeepLXApiKey', page).val(config.DeepLXApiKey).change();
+                $('#txtOpenAiXBaseUrl', page).val(config.OpenAiXBaseUrl).change();
+                $('#txtOpenAiXApiKey', page).val(config.OpenAiXApiKey).change();
+                $('#txtOpenAiXModel', page).val(config.OpenAiXModel).change();
+                $('#txtOpenAiXSystemPrompt', page).val(config.OpenAiXSystemPrompt).change();
+                $('#txtOpenAiXTemperature', page).val(config.OpenAiXTemperature).change();
                 page.querySelector('#chkEnableTitleSubstitution').checked = config.EnableTitleSubstitution;
                 $('#txtTitleRawSubstitutionTable', page).val(config.TitleRawSubstitutionTable).change();
                 page.querySelector('#chkEnableActorSubstitution').checked = config.EnableActorSubstitution;
@@ -373,6 +446,7 @@
                 config.EnableRealActorNames = $('#chkEnableRealActorNames', form).prop('checked');
                 config.EnableBadges = $('#chkEnableBadges', form).prop('checked');
                 config.BadgeUrl = $('#txtBadgeUrl', form).val();
+                config.BadgeUrl2 = $('#txtBadgeUrl2', form).val();
                 config.PrimaryImageRatio = $('#txtPrimaryImageRatio', form).val();
                 config.DefaultImageQuality = $('#txtDefaultImageQuality', form).val();
                 config.EnableMovieProviderFilter = $('#chkEnableMovieProviderFilter', form).prop('checked');
@@ -388,6 +462,13 @@
                 config.DeepLApiKey = $('#txtDeepLApiKey', form).val();
                 config.DeepLXAltUrl = $('#txtDeepLAltUrl', form).val();
                 config.OpenAiApiKey = $('#txtOpenAiApiKey', form).val();
+                config.DeepLXBaseUrl = $('#txtDeepLXBaseUrl', form).val();
+                config.DeepLXApiKey = $('#txtDeepLXApiKey', form).val();
+                config.OpenAiXBaseUrl = $('#txtOpenAiXBaseUrl', form).val();
+                config.OpenAiXApiKey = $('#txtOpenAiXApiKey', form).val();
+                config.OpenAiXModel = $('#txtOpenAiXModel', form).val();
+                config.OpenAiXSystemPrompt = $('#txtOpenAiXSystemPrompt', form).val();
+                config.OpenAiXTemperature = parseFloat($('#txtOpenAiXTemperature', form).val()) || 0.7;
                 config.EnableTitleSubstitution = $('#chkEnableTitleSubstitution', form).prop('checked');
                 config.TitleRawSubstitutionTable = $('#txtTitleRawSubstitutionTable', form).val();
                 config.EnableActorSubstitution = $('#chkEnableActorSubstitution', form).prop('checked');

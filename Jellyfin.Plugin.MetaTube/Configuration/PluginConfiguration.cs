@@ -76,6 +76,12 @@ public class PluginConfiguration : BasePluginConfiguration
     public string BadgeUrl { get; set; } = "zimu.png";
 
 #if __EMBY__
+    [DisplayName("Badge url 2")]
+    [Description("Second badge url for videos with 'UC' tag, PNG format is recommended.")]
+#endif
+    public string BadgeUrl2 { get; set; } = "zimu_uc.png";
+
+#if __EMBY__
     [DisplayName("Primary image ratio")]
     [Description("Aspect ratio for primary images, set a negative value to use the default.")]
 #endif
@@ -179,6 +185,49 @@ public class PluginConfiguration : BasePluginConfiguration
     [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAi)]
 #endif
     public string OpenAiApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("DeepLX api key")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepLX)]
+#endif
+    public string DeepLXApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("DeepLX base url")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.DeepLX)]
+#endif
+    public string DeepLXBaseUrl { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI api key")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXApiKey { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI base url")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXBaseUrl { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI model")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXModel { get; set; } = "gpt-3.5-turbo";
+
+#if __EMBY__
+    [DisplayName("OpenAI system prompt")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public string OpenAiXSystemPrompt { get; set; } = string.Empty;
+
+#if __EMBY__
+    [DisplayName("OpenAI temperature")]
+    [Description("Controls randomness in the model's output (0.0-2.0). Lower values make the output more focused and deterministic.")]
+    [VisibleCondition(nameof(TranslationEngine), ValueCondition.IsEqual, TranslationEngine.OpenAiX)]
+#endif
+    public float OpenAiXTemperature { get; set; } = 0.7f;
 
 #if __EMBY__
     [DisplayName("Enable title substitution")]

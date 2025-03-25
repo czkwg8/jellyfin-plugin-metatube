@@ -1,6 +1,7 @@
 using System.Collections.Specialized;
 using Jellyfin.Plugin.MetaTube.Configuration;
 using Jellyfin.Plugin.MetaTube.Metadata;
+using System.Globalization;
 
 namespace Jellyfin.Plugin.MetaTube.Translation;
 
@@ -47,11 +48,30 @@ public static class TranslationHelper
                     { "deepl-alt-url", Configuration.DeepLAltUrl }
                 });
                 break;
+            case TranslationEngine.DeepLX:
+                millisecondsDelay = 100;
+                nv.Add(new NameValueCollection
+                {
+                    { "deepl-api-key", Configuration.DeepLXApiKey },
+                    { "base-url", Configuration.DeepLXBaseUrl }
+                });
+                break;
             case TranslationEngine.OpenAi:
                 millisecondsDelay = 1000;
                 nv.Add(new NameValueCollection
                 {
                     { "openai-api-key", Configuration.OpenAiApiKey }
+                });
+                break;
+            case TranslationEngine.OpenAiX:
+                millisecondsDelay = 1000;
+                nv.Add(new NameValueCollection
+                {
+                    { "openai-api-key", Configuration.OpenAiXApiKey },
+                    { "base-url", Configuration.OpenAiXBaseUrl },
+                    { "model", Configuration.OpenAiXModel },
+                    { "system-prompt", Configuration.OpenAiXSystemPrompt },
+                    { "temperature", Configuration.OpenAiXTemperature.ToString(CultureInfo.InvariantCulture) }
                 });
                 break;
             default:
