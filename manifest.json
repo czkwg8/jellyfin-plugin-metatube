@@ -1,0 +1,29 @@
+[
+  {
+    "guid": "01cc53ec-c415-4108-bbd4-a684a9801a32",
+    "name": "MetaTube",
+    "description": "MetaTube Plugin for Jellyfin/Emby.",
+    "overview": "MetaTube Plugin for Jellyfin/Emby.",
+    "owner": "MetaTube",
+    "category": "Metadata",
+    "imageUrl": "https://raw.githubusercontent.com/metatube-community/jellyfin-plugin-metatube/main/Jellyfin.Plugin.MetaTube/thumb.png",
+    "versions": [
+      {
+        "checksum": "02e0cd4e97e3a683341e838a78ab8c4a",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/czkwg8/jellyfin-plugin-metatube/releases/download/v2025.325.2356.0/Jellyfin.MetaTube@v2025.325.2356.0.zip",
+        "timestamp": "2025-03-25T23:56:40Z",
+        "version": "2025.325.2356.0"
+      },
+      {
+        "checksum": "5d74184d277d0d4eb39cf77edfee714a",
+        "changelog": "Auto Released by Actions",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/czkwg8/jellyfin-plugin-metatube/releases/download/v2025.325.2251.0/Jellyfin.MetaTube@v2025.325.2251.0.zip",
+        "timestamp": "2025-03-25T22:51:58Z",
+        "version": "2025.325.2251.0"
+      }
+    ]
+  }
+]
